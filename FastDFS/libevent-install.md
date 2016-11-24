@@ -7,7 +7,7 @@
 4.依次执行：
  
 <code>
-./configure –prefix=/usr （或 ./configure --program-prefix=/usr）  
+./configure –prefix=/usr （或 ./configure --program-prefix=/usr） 
 make  
 make install
 </code>
