@@ -155,7 +155,7 @@
     store_path0=/opt/fastdfs/storage/images-data
     subdir_count_per_path=256
     # 指定 tracker 服务器的 IP 和端口
-    tracker_server=192.168.1.114:22122
+    tracker_server=[替换你自己的ip]:22122
     log_level=info
     run_by_group=
     run_by_user=
@@ -187,7 +187,8 @@
     http.domain_name=
     http.server_port=8888
     ```
-    - 启动 storage 服务：`/usr/bin/fdfs_storaged /etc/fdfs/storage.conf`，首次启动会很慢，因为它在创建预设存储文件的目录
+    - 关闭防火墙:`service iptables stop`
+    - 启动 storage 服务：`/usr/bin/fdfs_storaged /etc/fdfs/storage.conf`，首次启动会很慢，因为它在创建预设存储文件的目录
     - 重启 storage 服务：`/usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart`
     - 查看是否有 storage 进程：`ps aux | grep storage`
 - 测试是否部署成功
@@ -201,7 +202,7 @@
     # 创建目录：mkdir -p /opt/fastdfs/client/data-and-log
     base_path=/opt/fastdfs/client/data-and-log
     # 指定 tracker 服务器的 IP 和端口
-    tracker_server=192.168.1.114:22122
+    tracker_server=[替换你自己的ip]:22122
     log_level=info
     use_connection_pool = false
     connection_pool_max_idle_time = 3600
@@ -211,12 +212,12 @@
     http.tracker_server_port=80
     ```
     - 在终端中通过 shell 上传 opt 目录下的一张图片：`/usr/bin/fdfs_test /etc/fdfs/client.conf upload /opt/test.jpg`
-    - 如下图箭头所示，生成的图片地址为：`http://192.168.1.114/group1/M00/00/00/wKgBclb0aqWAbVNrAAAjn7_h9gM813_big.jpg`
+    - 如下图箭头所示，生成的图片地址为：`http://[替换你自己的ip]/group1/M00/00/00/wKgBclb0aqWAbVNrAAAjn7_h9gM813_big.jpg`
      - ![FastDFS](images/FastDFS-a-1.jpg)
     - 即使我们现在知道图片的访问地址我们也访问不了，因为我们还没装 FastDFS 的 Nginx 模块
 - 安装 **fastdfs-nginx-module_v1.16.tar.gz**，安装 Nginx 第三方模块相当于这个 Nginx 都是要重新安装一遍的
-    - 解压 Nginx 模块：`tar zxvf fastdfs-nginx-module_v1.16.tar.gz`，得到目录地址：**/opt/setups/FastDFS/fastdfs-nginx-module**
-    - 编辑 Nginx 模块的配置文件：`vim /opt/setups/FastDFS/fastdfs-nginx-module/src/config`
+    - 解压 Nginx 模块：`tar zxvf fastdfs-nginx-module_v1.16.tar.gz`，得到目录地址：**/tmp/FastDFS/fastdfs-nginx-module**
+    - 编辑 Nginx 模块的配置文件：`vim /tmp/FastDFS/fastdfs-nginx-module/src/config`
     - 找到下面一行包含有 `local` 字眼去掉，因为这三个路径根本不是在 local 目录下的。
     ``` nginx
     CORE_INCS="$CORE_INCS /usr/local/include/fastdfs /usr/local/include/fastcommon/"
@@ -225,14 +226,14 @@
     ``` nginx
     CORE_INCS="$CORE_INCS /usr/include/fastdfs /usr/include/fastcommon/"
     ```
-    - 复制文件：`cp /opt/setups/FastDFS/FastDFS/conf/http.conf /etc/fdfs`
-    - 复制文件：`cp /opt/setups/FastDFS/FastDFS/conf/mime.types /etc/fdfs`
+    - 复制文件：`cp /tmp/FastDFS/FastDFS/conf/http.conf /etc/fdfs`
+    - 复制文件：`cp /tmp/FastDFS/FastDFS/conf/mime.types /etc/fdfs`
 - 安装 Nginx 和 Nginx 第三方模块
     - 安装 Nginx 依赖包：`yum install -y gcc gcc-c++ pcre pcre-devel zlib zlib-devel openssl openssl-devel`
     - 预设几个文件夹，方便等下安装的时候有些文件可以进行存放：
         - `mkdir -p /usr/local/nginx /var/log/nginx /var/temp/nginx /var/lock/nginx`
-    - 解压 Nginx：`tar zxvf /opt/setups/nginx-1.8.1.tar.gz`
-    - 进入解压后目录：`cd /opt/setups/nginx-1.8.1/`
+    - 解压 Nginx：`tar zxvf /opt/setups/nginx-1.8.0.tar.gz`
+    - 进入解压后目录：`cd /tmp/FastDFS/nginx-1.8.0/`
     - 编译配置：（注意最后一行）
     ``` ini
     ./configure \
@@ -247,11 +248,11 @@
     --http-fastcgi-temp-path=/var/temp/nginx/fastcgi \
     --http-uwsgi-temp-path=/var/temp/nginx/uwsgi \
     --http-scgi-temp-path=/var/temp/nginx/scgi \
-    --add-module=/opt/setups/FastDFS/fastdfs-nginx-module/src
+    --add-module=/tmp/FastDFS/fastdfs-nginx-module/src
     ```
     - 编译：`make`
     - 安装：`make install`
-    - 复制 Nginx 模块的配置文件：`cp /opt/setups/FastDFS/fastdfs-nginx-module/src/mod_fastdfs.conf /etc/fdfs`
+    - 复制 Nginx 模块的配置文件：`cp /tmp/FastDFS/fastdfs-nginx-module/src/mod_fastdfs.conf /etc/fdfs`
     - 编辑 Nginx 模块的配置文件：`vim /etc/fdfs/mod_fastdfs.conf`，编辑内容看下面中文注释
     - 如果在已经启动 Nginx 的情况下修改下面内容记得要重启 Nginx。
     ``` ini
@@ -265,10 +266,10 @@
     use_storage_id = false
     storage_ids_filename = storage_ids.conf
     # 指定 tracker 服务器的 IP 和端口
-    tracker_server=192.168.1.114:22122
+    tracker_server=[替换你自己的ip]:22122
     storage_server_port=23000
     group_name=group1
-    # 因为我们访问图片的地址是：http://192.168.1.114/group1/M00/00/00/wKgBclb0aqWAbVNrAAAjn7_h9gM813_big.jpg
+    # 因为我们访问图片的地址是：http://[替换你自己的ip]/group1/M00/00/00/wKgBclb0aqWAbVNrAAAjn7_h9gM813_big.jpg
     # 该地址前面是带有 /group1/M00，所以我们这里要使用 true，不然访问不到（原值是 false）
     url_have_group_name = true
     store_path_count=1
@@ -307,7 +308,7 @@
         server {
             listen       80;
             # 访问本机
-            server_name  192.168.1.114;
+            server_name  [替换你自己的ip];
         
             # 拦截包含 /group1/M00 请求，使用 fastdfs 这个 Nginx 模块进行转发
             location /group1/M00 {
@@ -319,7 +320,7 @@
     - 启动 Nginx
         - 停掉防火墙：`service iptables stop`
         - 启动：`/usr/local/nginx/sbin/nginx`，启动完成 shell 是不会有输出的
-        - 访问：`192.168.1.114`，如果能看到：`Welcome to nginx!`，即可表示安装成功
+        - 访问：`[替换你自己的ip]`，如果能看到：`Welcome to nginx!`，即可表示安装成功
         - 检查 时候有 Nginx 进程：`ps aux | grep nginx`，正常是显示 3 个结果出来 
         - 刷新 Nginx 配置后重启：`/usr/local/nginx/sbin/nginx -s reload`
         - 停止 Nginx：`/usr/local/nginx/sbin/nginx -s stop`
