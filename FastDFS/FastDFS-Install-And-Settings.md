@@ -1,14 +1,14 @@
 # FastDFS 安装和配置
 
 
-## 它是什么
+## 简介
 
 - FastDFS 介绍：<http://www.oschina.net/p/fastdfs>
 - 官网下载 1：<https://github.com/happyfish100/fastdfs/releases>
 - 官网下载 2：<https://sourceforge.net/projects/fastdfs/files/>
 - 官网下载 3：<http://code.google.com/p/fastdfs/downloads/list>
 
-## 为什么会出现
+## 安装
 ### 单机安装部署（CentOS 6.8 环境）
 - 文件准备：
     - 链接：http://pan.baidu.com/s/1dFihUH7 密码：gk00
