@@ -9,27 +9,9 @@
 - 官网下载 3：<http://code.google.com/p/fastdfs/downloads/list>
 
 ## 为什么会出现
-
-
-
-## 哪些人喜欢它
-
-
-## 哪些人不喜欢它
-
-
-
-## 为什么学习它
-
-
-
-
-## 同类工具
-
-
-
-### 单机安装部署（CentOS 6.7 环境）
-
+### 单机安装部署（CentOS 6.8 环境）
+- 文件准备：
+    - 链接：http://pan.baidu.com/s/1dFihUH7 密码：gk00
 - 环境准备：
     - 已经安装好 Nginx
 - 软件准备：
@@ -212,8 +194,7 @@
     http.tracker_server_port=80
     ```
     - 在终端中通过 shell 上传 opt 目录下的一张图片：`/usr/bin/fdfs_test /etc/fdfs/client.conf upload /opt/test.jpg`
-    - 如下图箭头所示，生成的图片地址为：`http://[替换你自己的ip]/group1/M00/00/00/wKgBclb0aqWAbVNrAAAjn7_h9gM813_big.jpg`
-     - ![FastDFS](images/FastDFS-a-1.jpg)
+    - 上传后会输出地址，生成的图片地址为：`http://[替换你自己的ip]/group1/M00/00/00/wKgBclb0aqWAbVNrAAAjn7_h9gM813_big.jpg`
     - 即使我们现在知道图片的访问地址我们也访问不了，因为我们还没装 FastDFS 的 Nginx 模块
 - 安装 **fastdfs-nginx-module_v1.16.tar.gz**，安装 Nginx 第三方模块相当于这个 Nginx 都是要重新安装一遍的
     - 解压 Nginx 模块：`tar zxvf fastdfs-nginx-module_v1.16.tar.gz`，得到目录地址：**/tmp/FastDFS/fastdfs-nginx-module**
