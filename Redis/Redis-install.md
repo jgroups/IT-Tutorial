@@ -1,9 +1,11 @@
-#1、安装Xshell_5.0.0.37_setup
-#2、安装VMware_workstation_full_12.5.0.11529（安装的时候不要选择centOS镜像文件选择空那项）
-#3、将redis传到虚拟机系统中
-（1、 设置网络重启虚拟机
-     安装gcc和c++ :      yum install -y gcc g++ gcc-c++
-     安装vim    :     yum -y install vim*    
+## 安装Xshell_5.0.0.37_setup
+## 安装VMware_workstation_full_12.5.0.11529（安装的时候不要选择centOS镜像文件选择空那项）
+## 将redis传到虚拟机系统中
+- 设置网络,重启虚拟机
+- 安装gcc和c++:   
+     `yum install -y gcc g++ gcc-c++`
+- 安装vim:    
+'yum -y install vim*`    
 
 #2、解压、编译、安装redis-3.2.5：
 tar -zxvf redis-3.2.5.tar.gz -C /usr/src/
