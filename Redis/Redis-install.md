@@ -12,19 +12,19 @@
 `make && make install`
 
 ### 创建redis相关目录
- `mkdir -p /home/redis/bin`
- `mkdir -p /home/redis/log`
- `mkdir -p /home/redis/pid`
- `mkdir -p /home/redis/db`
-#4、将可执行文件复制到自己的安装目录：/home/redis/
-          ln -s /usr/local/bin/redis-*   /home/redis/bin/
-
-#5、复制配置文件到自己的安装目录：/home/redis/
-          cp redis.conf /home/redis/
-          cp sentinel.conf /home/redis/
-
-#6、进入自己的安装目录，编辑sentinel.conf配置文件：
-cd /home/redis/
-vim /home/redis/sentinel.conf）
-#4、关闭虚拟机防火墙
-     service iptables stop
+ - 创建目录:`mkdir -p /home/redis/bin`
+ - 创建目录:`mkdir -p /home/redis/log`
+ - 创建目录:`mkdir -p /home/redis/pid`
+ - 创建目录:`mkdir -p /home/redis/db`
+### 将可执行文件复制到自己的安装目录：/home/redis/
+ `ln -s /usr/local/bin/redis-*   /home/redis/bin/`
+### 复制配置文件到自己的安装目录：/home/redis/
+`cp redis.conf /home/redis/`
+`cp sentinel.conf /home/redis/`
+### 进入自己的安装目录，编辑sentinel.conf配置文件：
+ - 进入目录:
+`cd /home/redis/`
+ - 编辑文件:
+`vim /home/redis/sentinel.conf`
+### 关闭虚拟机防火墙
+`service iptables stop`
