@@ -311,13 +311,12 @@
     - 编辑 Nginx 配置文件
     - 编辑配置文件：`vim /etc/rc.d/rc.local`
     在末尾插入
-  
-    ``` ini
+    ``` nginx
     #启动 tracker 服务
     /usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart
     #启动 storage 服务
     /usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart
-    ```
+    ```
   
 ### 多机安装部署（CentOS 6.7 环境）
 
