@@ -308,10 +308,9 @@
         - 如果访问不了，或是出现其他信息看下错误立即：`vim /var/log/nginx/error.log`
 
 - 配置开机自动启动:
-    - 编辑 Nginx 配置文件
-    - 编辑配置文件：`vim /etc/rc.d/rc.local`
-    在末尾插入
-    ``` nginx
+    - 编辑配置文件：`vim /etc/rc.d/rc.local`,在末尾插入
+    
+    ```
     #启动 tracker 服务
     /usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart
     #启动 storage 服务
