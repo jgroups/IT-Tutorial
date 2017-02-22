@@ -315,7 +315,7 @@
   /usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart
   /usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart
   ```
-### 多机安装部署（CentOS 6.7 环境）
+ ### 多机安装部署（CentOS 6.7 环境）
 
 
 http://blog.csdn.net/ricciozhang/article/details/49402273
