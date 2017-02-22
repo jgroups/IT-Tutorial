@@ -309,8 +309,10 @@
 
 - 配置开机自动启动:
   - 编辑配置文件：`vim /etc/rc.d/rc.local`，在末尾插入
-  `/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart`
-  `/usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart`
+  ``` ini
+  /usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart
+  /usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart
+  ```
   
 ### 多机安装部署（CentOS 6.7 环境）
 
