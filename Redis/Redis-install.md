@@ -21,7 +21,7 @@
  - 创建目录:`mkdir -p /home/redis/db`
  
 ### 将可执行文件复制到自己的安装目录：/home/redis/
- `ln -s /usr/local/bin/redis-*   /home/redis/bin/`
+ `ln -s /usr/local/bin/redis-*  /home/redis/bin/`
  
 ### 复制配置文件到自己的安装目录：/home/redis/
 `cp redis.conf /home/redis/`
